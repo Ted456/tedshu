@@ -62,9 +62,8 @@ def GetAllARdata(fa,Point1,Point2,Point3,Point4):
     WriteFile = str(Station_List[i]) + '_AR_date_arealMean.csv'
     Alldata.to_csv(WriteFile,index=False)
     
-for i in range(len(Station_List)): #len(Station_List)14,65
+for i in range(len(Station_List)):
     os.chdir(ARfilepath)
-Point4[2]))
     Point1 = GetARivtForPoint(fi,fa,x1[i],y1[i])
     Point2 = GetARivtForPoint(fi,fa,x1[i],y2[i])
     Point3 = GetARivtForPoint(fi,fa,x2[i],y1[i])
