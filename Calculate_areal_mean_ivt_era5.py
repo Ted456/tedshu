@@ -25,17 +25,18 @@ ARfile = ["ar_%04d%02d%04d%02d_out.nc" % (Year, 9, Year+1, 8)for Year in range(1
 fi = xr.open_mfdataset(IVTfile,concat_dim='time')
 fa = xr.open_mfdataset(ARfile,concat_dim='time')
 #%%
+### Extract IVT,IVTX,IVTY, compute direction, and AR presence (represented by Shape) for grid point 
 def GetARivtForPoint(fi,fa,x,y):
-    # with xr.open_dataset(IVTfile, chunks = {'time': 'auto', 'lon': 'auto', 'lat': 'auto'}) as fi, xr.open_dataset(ARfile,chunks = {'time': 'auto', 'lon': 'auto', 'lat': 'auto'}) as fa:
     Shape = fa.shape[:,y,x]
     IVT = fi.ivt[:,y,x]
     IVTX = fi.ivtx[:,y,x]
     IVTY = fi.ivty[:,y,x]
     dire = np.arctan2(IVTX,IVTY)*180/np.pi
-e)
-    return IVT, Shape,dire             
+    return IVT, Shape,dire   
+
 def GetAllARdata(fa,Point1,Point2,Point3,Point4):
-    Datetime = fa.time
+    Datetime = fa.time 
+    ### Try to convert xarray Dataarray to make up a dataframe, but it is too slow, size of each array is 10,2272 
     ivt1 = Point1[0].to_masked_array()
     ivt2 = Point2[0].to_masked_array()
     ivt3 = Point3[0].to_masked_array()
